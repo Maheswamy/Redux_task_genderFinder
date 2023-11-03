@@ -1,16 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { inputAdd, startFindGender } from "./../action/action";
+import { inputAdd, startEditGender, startFindGender } from "./../action/action";
 
 const Form = () => {
   const dispatch = useDispatch();
-  const input = useSelector((state) => state.users.input);
+  const users = useSelector((state) => state.users);
   //   const [name, setName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(name);
-    dispatch(startFindGender(input));
+    if(users.editUserId){
+    return dispatch(startEditGender(users.input))
+    }
+    dispatch(startFindGender(users.input));
   };
   return (
     <div>
@@ -20,10 +22,10 @@ const Form = () => {
           type="text"
           name="name"
           id="name"
-          value={input}
+          value={users.input}
           onChange={(e) => dispatch(inputAdd(e.target.value))}
         />
-        <input type="submit" value="Add" />
+        <input type="submit" value={users.editUserId ? "Edit" : "Add"} />
       </form>
     </div>
   );

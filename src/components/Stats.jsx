@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, PieChart } from 'react-chartkick'
+import {  PieChart } from 'react-chartkick'
 import 'chartkick/chart.js'
 import { useSelector } from "react-redux";
 

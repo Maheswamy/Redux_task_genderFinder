@@ -1,18 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "./../action/action";
+import { removeUser, setUserID } from "./../action/action";
 
 const Table = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   console.log(users);
 
-  const handleRemove = (id) => {
+  const handleRemove = (index) => {
     const confirm = window.confirm("are you sure?");
     if (confirm) {
-      dispatch(removeUser(id));
-      console.log(id);
+      dispatch(removeUser(index));
+      console.log(index);
     }
+  };
+
+  const handleEdit = (id) => {
+    dispatch(setUserID(id));
+    console.log(id);
   };
   return (
     <div>
@@ -38,6 +43,13 @@ const Table = () => {
                       }}
                     >
                       X
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleEdit(ele.id);
+                      }}
+                    >
+                      Edit
                     </button>
                   </td>
                 </tr>

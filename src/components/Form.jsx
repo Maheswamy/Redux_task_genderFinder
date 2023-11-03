@@ -9,13 +9,16 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(users.editUserId){
-    return dispatch(startEditGender(users.input))
+    if (users.editUserId) {
+      return dispatch(startEditGender(users.input));
     }
     dispatch(startFindGender(users.input));
   };
   return (
     <div>
+      {users.serverErrors && (
+        <b style={{ color: "red" }}>{users.serverErrors}</b>
+      )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Enter the name:</label>
         <input

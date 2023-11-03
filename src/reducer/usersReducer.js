@@ -1,10 +1,15 @@
-const intialState = { data: [], input: "", editUserId: "" };
+const intialState = { data: [], input: "", editUserId: "", serverErrors: "" };
 
 const usersReducers = (state = intialState, action) => {
   switch (action.type) {
     case "ADD_NAME": {
       console.log(action.payload, "kajsh");
-      return { ...state, data: [...state.data, action.payload], input: "" };
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+        input: "",
+        serverErrors: "",
+      };
     }
     case "REMOVE_USER": {
       console.log(action.payload);
@@ -14,7 +19,7 @@ const usersReducers = (state = intialState, action) => {
       };
     }
     case "INPUT_NAME": {
-      return { ...state, input: action.payload };
+      return { ...state, input: action.payload,serverErrors:'' };
     }
 
     case "SET_USER_ID": {
@@ -38,7 +43,12 @@ const usersReducers = (state = intialState, action) => {
         }),
         input: "",
         editUserId: "",
+        serverErrors: "",
       };
+    }
+    case "SET_SERVER_ERROR": {
+      console.log(action.payload);
+      return { ...state, serverErrors: action.payload };
     }
     default: {
       return { ...state };

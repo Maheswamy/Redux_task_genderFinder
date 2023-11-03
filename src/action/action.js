@@ -8,22 +8,22 @@ export const startFindGender = (name) => {
       response.data.id = Number(new Date());
       dispatch(findGender(response.data));
     } catch (e) {
-      console.log(e);
+      dispatch(setServerErrors(e.response.data.error));
     }
   };
 };
 
 export const startEditGender = (name) => {
-  return async (dispatch,getState) => {
+  return async (dispatch, getState) => {
     try {
       const response = await axios.get(`https://api.genderize.io?name=${name}`);
-      const state=getState(state=>state)
-     
-      response.data.id =state.users.editUserId ;
+      const state = getState((state) => state);
+
+      response.data.id = state.users.editUserId;
 
       dispatch(editGender(response.data));
     } catch (e) {
-      console.log(e);
+      dispatch(setServerErrors(e.response.data.error));
     }
   };
 };
@@ -59,5 +59,12 @@ export const setUserID = (id) => {
   return {
     type: "SET_USER_ID",
     payload: id,
+  };
+};
+
+export const setServerErrors = (err) => {
+  return {
+    type: "SET_SERVER_ERROR",
+    payload: err,
   };
 };

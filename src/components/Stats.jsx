@@ -1,5 +1,6 @@
 import React from "react";
-import { PieChart } from "react-chartkick";
+import { LineChart, PieChart } from 'react-chartkick'
+import 'chartkick/chart.js'
 import { useSelector } from "react-redux";
 
 const Stats = () => {
@@ -18,7 +19,7 @@ const Stats = () => {
   return (
     <div>
       <h4>Chart</h4>
-      {/* <PieChart data={[["Blueberry", 44], ["Strawberry", 23]]} /> */}
+      <PieChart data={data} />
     </div>
   );
 };

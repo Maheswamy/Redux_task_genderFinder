@@ -8,8 +8,11 @@ const Table = () => {
   console.log(users);
 
   const handleRemove = (id) => {
-    console.log(id);
-    dispatch(removeUser(id));
+    const confirm = window.confirm("are you sure?");
+    if (confirm) {
+      dispatch(removeUser(id));
+      console.log(id);
+    }
   };
   return (
     <div>
